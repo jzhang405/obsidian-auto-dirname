@@ -493,6 +493,17 @@ class DirectoryManager:
         if self.verbose:
             click.echo(f"Directory structure saved to JSON file: {output_file}")
     
+    def _show_json_preview(self, dirs: List[Dict]):
+        """Show pretty printed JSON preview in dry-run mode"""
+        data = {"categories": dirs}
+        json_str = json.dumps(data, indent=2, ensure_ascii=False)
+        
+        click.echo("\n" + "="*50)
+        click.echo("JSON Structure Preview:")
+        click.echo("="*50)
+        click.echo(json_str)
+        click.echo("="*50 + "\n")
+    
     def generate(self):
         """Main method to generate directory structure"""
         # Generate directories using LLM
@@ -518,6 +529,8 @@ class DirectoryManager:
             output_file = os.path.join(self.input_dir, "directory_structure.json")
             click.echo(f"Directory structure saved to {output_file}")
         else:
+            # In dry-run mode, show JSON preview
+            self._show_json_preview(merged_dirs)
             click.echo("Dry-run mode: No directories were created")
     
     def _add_uncategorized_directory(self, dirs: List[Dict]):
@@ -580,7 +593,7 @@ class DirectoryManager:
 @click.option('--input-dir', default='.', help='Input directory path (default: current directory)')
 @click.option('--locale', default='en', help='Locale for directory names (default: en)')
 @click.option('--keywords', help='Comma-separated list of keywords to use as seeds')
-@click.option('--method', type=click.Choice(['PARA', 'Zettelkasten', 'default']), 
+@click.option('--method', type=click.Choice(['PARA', 'default']), 
               default='default', help='Organizational method')
 @click.option('--min', 'min_dirs', default=5, help='Minimum number of directories to generate (default: 5)')
 @click.option('--max', 'max_dirs', default=10, help='Maximum number of directories to generate (default: 10)')

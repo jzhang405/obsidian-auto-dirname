@@ -5,7 +5,7 @@
 ## 功能特点
 
 - 🤖 **AI 驱动**：使用 LLM 根据关键词和语言环境智能生成目录结构
-- 📁 **多种组织方法**：支持 PARA、Zettelkasten 和默认组织方法
+- 📁 **多种组织方法**：支持 PARA 和默认组织方法
 - 🌏 **多语言支持**：支持中文和英文 locale
 - 🔢 **数量控制**：可设置生成目录的最小和最大数量（默认 5-10 个）
 - 👀 **预览模式**：支持 dry-run 模式预览变更
@@ -81,7 +81,7 @@ python obsidian_auto_dirname.py [options]
 | `--input-dir` | TEXT | `.` | 输入目录路径（默认：当前目录） |
 | `--locale` | TEXT | `en` | 目录名称语言（`en` 或 `zh`） |
 | `--keywords` | TEXT | - | 逗号分隔的关键词列表 |
-| `--method` | CHOICE | `default` | 组织方法（`PARA`、`Zettelkasten`、`default`） |
+| `--method` | CHOICE | `default` | 组织方法（`PARA`、`default`） |
 | `--min` | INTEGER | `5` | 生成目录的最小数量 |
 | `--max` | INTEGER | `10` | 生成目录的最大数量 |
 | `--dry-run` | FLAG | - | 预览模式，不实际创建目录 |
@@ -131,9 +131,6 @@ python obsidian_auto_dirname.py --locale=zh --keywords="编程,设计,市场营�
 ```bash
 # 使用 PARA 方法（支持三级目录）
 python obsidian_auto_dirname.py --method=PARA --keywords="项目,领域,资源,归档"
-
-# 使用 Zettelkasten 方法
-python obsidian_auto_dirname.py --method=Zettelkasten --keywords="概念,链接,索引"
 ```
 
 ### 4. 数量控制
@@ -210,7 +207,6 @@ Directory Structure Preview for '/path/to/vault':
 
 ### 组织方法特色
 - **PARA**：支持项目、领域、资源、归档的三级结构
-- **Zettelkasten**：适用于知识卡片系统的目录结构
 - **Default**：通用的二级目录结构
 
 ## 注意事项
